@@ -6,10 +6,10 @@ const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
 
   const handleNavigate = (section: number) => {
-    // Scroll to the appropriate position
+    // Scroll to the appropriate position (20% per section)
+    const targetScroll = section * 0.2;
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const targetScroll = (section / 4) * scrollHeight;
-    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    window.scrollTo({ top: targetScroll * scrollHeight, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -17,6 +17,8 @@ const Index = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPosition = window.scrollY;
       const scrollProgress = scrollPosition / scrollHeight;
+      
+      // Determine which section we're closest to
       const section = Math.round(scrollProgress * 4);
       setCurrentSection(Math.min(section, 4));
     };
@@ -29,6 +31,11 @@ const Index = () => {
     <div className="relative">
       <Scene3D />
       <Navigation onNavigate={handleNavigate} currentSection={currentSection} />
+      
+      {/* Scroll hint */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 text-foreground/60 text-sm uppercase tracking-wider animate-pulse">
+        Scroll to Zoom
+      </div>
     </div>
   );
 };
