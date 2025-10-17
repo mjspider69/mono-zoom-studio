@@ -1,26 +1,46 @@
 import { motion } from 'framer-motion';
-import { Zap, Target, TrendingUp, Megaphone } from 'lucide-react';
+import { Share2, Globe, FileText, Video, Mail, PenTool, Zap, Package } from 'lucide-react';
 
 const services = [
   {
+    icon: Share2,
+    title: 'Social Media Handling',
+    description: 'Expert management of social platforms to enhance engagement and brand presence'
+  },
+  {
+    icon: Package,
+    title: 'Turnkey Projects',
+    description: 'Complete solutions from concept to execution, ensuring seamless project delivery'
+  },
+  {
+    icon: Globe,
+    title: 'Website Development',
+    description: 'Custom websites tailored for user experience and performance'
+  },
+  {
+    icon: FileText,
+    title: 'Content Creation',
+    description: 'High-quality content that resonates with target audiences across various formats'
+  },
+  {
+    icon: Video,
+    title: 'Reels & Photoshoots',
+    description: 'Professional videography and photography services to capture brand stories visually'
+  },
+  {
+    icon: Mail,
+    title: 'Email Marketing',
+    description: 'Targeted campaigns that drive engagement and conversions'
+  },
+  {
+    icon: PenTool,
+    title: 'Copywriting',
+    description: 'Persuasive writing that effectively communicates brand messages'
+  },
+  {
     icon: Zap,
-    title: 'Brand Strategy',
-    description: 'Comprehensive brand development and positioning strategies'
-  },
-  {
-    icon: Target,
-    title: 'Digital Marketing',
-    description: 'Multi-channel campaigns that drive engagement and conversions'
-  },
-  {
-    icon: TrendingUp,
-    title: 'Growth Analytics',
-    description: 'Data-driven insights to optimize performance and ROI'
-  },
-  {
-    icon: Megaphone,
-    title: 'Social Media',
-    description: 'Strategic content creation and community management'
+    title: 'AI Automation',
+    description: 'Streamlining processes to enhance efficiency and productivity'
   }
 ];
 
@@ -36,7 +56,7 @@ export const ServicesSection = () => {
         >
           SERVICES
         </motion.h2>
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}

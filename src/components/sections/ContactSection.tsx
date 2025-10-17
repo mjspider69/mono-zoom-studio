@@ -65,26 +65,25 @@ export const ContactSection = () => {
               <Mail className="w-6 h-6 mt-1 flex-shrink-0" />
               <div>
                 <h3 className="font-light text-lg mb-1">Email</h3>
-                <p className="text-muted-foreground">hello@agency.com</p>
+                <p className="text-muted-foreground">gumming4u@gmail.com</p>
               </div>
             </div>
             
             <div className="flex items-start space-x-4">
               <Phone className="w-6 h-6 mt-1 flex-shrink-0" />
               <div>
-                <h3 className="font-light text-lg mb-1">Phone</h3>
-                <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                <h3 className="font-light text-lg mb-2">Managing Director</h3>
+                <p className="text-muted-foreground font-medium">Aryaan Alam</p>
+                <p className="text-muted-foreground">+91 95510 77771</p>
               </div>
             </div>
             
             <div className="flex items-start space-x-4">
-              <MapPin className="w-6 h-6 mt-1 flex-shrink-0" />
+              <Phone className="w-6 h-6 mt-1 flex-shrink-0" />
               <div>
-                <h3 className="font-light text-lg mb-1">Location</h3>
-                <p className="text-muted-foreground">
-                  123 Creative Street<br />
-                  San Francisco, CA 94103
-                </p>
+                <h3 className="font-light text-lg mb-2">Marketing Director</h3>
+                <p className="text-muted-foreground font-medium">Isaac Vivian</p>
+                <p className="text-muted-foreground">+91 86670 31931</p>
               </div>
             </div>
           </motion.div>
