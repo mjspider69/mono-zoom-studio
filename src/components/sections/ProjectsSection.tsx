@@ -41,35 +41,47 @@ const projects = [
 
 export const ProjectsSection = () => {
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-foreground text-background px-8 overflow-y-auto py-20">
-      <div className="max-w-6xl w-full">
+    <div className="w-screen h-screen bg-foreground text-background overflow-y-auto py-12 px-8">
+      <div className="max-w-7xl mx-auto">
         <motion.h2 
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-6xl md:text-8xl font-light mb-16 tracking-tight"
+          className="text-5xl md:text-7xl font-light mb-12 tracking-tight"
         >
-          PROJECTS
+          OUR WORK
         </motion.h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group cursor-pointer"
+              initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
+              whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+              whileHover={{ scale: 1.05, rotateY: 5 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.1,
+                type: "spring",
+                stiffness: 100
+              }}
+              className="group cursor-pointer perspective-1000"
             >
-              <div className="overflow-hidden border border-background/20 mb-4">
-                <img 
+              <div className="overflow-hidden border border-background/20 mb-4 transform-gpu">
+                <motion.img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-64 object-cover"
+                  whileHover={{ scale: 1.15, rotate: 2 }}
+                  transition={{ duration: 0.5 }}
                 />
               </div>
-              <h3 className="text-xl font-light tracking-tight mb-2 group-hover:translate-x-2 transition-transform duration-300">
+              <motion.h3 
+                className="text-xl font-light tracking-tight mb-2"
+                whileHover={{ x: 8 }}
+                transition={{ duration: 0.3 }}
+              >
                 {project.title}
-              </h3>
+              </motion.h3>
               <p className="text-sm uppercase tracking-wider opacity-60">{project.category}</p>
             </motion.div>
           ))}

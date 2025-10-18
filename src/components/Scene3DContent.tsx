@@ -1,7 +1,7 @@
 import { Html } from '@react-three/drei';
 import { HeroSection } from './sections/HeroSection';
 import { AboutSection } from './sections/AboutSection';
-import { ServicesSection } from './sections/ServicesSection';
+import { SolutionsSection } from './sections/SolutionsSection';
 import { ProjectsSection } from './sections/ProjectsSection';
 import { ContactSection } from './sections/ContactSection';
 import { DepthMarkers } from './DepthMarkers';
@@ -32,14 +32,14 @@ export const Scene3DContent = () => {
         <AboutSection />
       </Html>
 
-      {/* Services Section - Z: -50 */}
+      {/* Solutions Section - Z: -50 */}
       <Html 
         position={[0, 0, -50]} 
         transform 
         occlude
         style={{ width: '100vw', height: '100vh' }}
       >
-        <ServicesSection />
+        <SolutionsSection />
       </Html>
 
       {/* Projects Section - Z: -75 */}

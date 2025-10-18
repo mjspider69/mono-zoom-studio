@@ -6,7 +6,7 @@ interface NavigationProps {
   currentSection: number;
 }
 
-const sections = ['Home', 'Our Story', 'Services', 'Projects', 'Contact'];
+const sections = ['Home', 'About', 'Solutions', 'Projects', 'Contact'];
 
 export const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);

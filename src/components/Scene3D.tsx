@@ -6,19 +6,22 @@ import { Scene3DContent } from './Scene3DContent';
 export const Scene3D = () => {
   return (
     <div className="fixed inset-0 w-full h-full">
-      <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
+      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
         <color attach="background" args={['#000000']} />
-        <ambientLight intensity={0.8} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} />
         
-        <ScrollControls pages={5} damping={0.1}>
+        {/* Studio lighting setup */}
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[10, 10, 5]} intensity={1.2} />
+        <directionalLight position={[-10, -10, -5]} intensity={0.8} />
+        <spotLight position={[0, 20, 0]} intensity={1.5} angle={0.3} penumbra={1} />
+        
+        <ScrollControls pages={5} damping={0.08}>
           <CameraController />
           <Scene3DContent />
         </ScrollControls>
         
-        {/* Fog for depth effect */}
-        <fog attach="fog" args={['#000000', 10, 120]} />
+        {/* Enhanced fog for studio atmosphere */}
+        <fog attach="fog" args={['#000000', 5, 140]} />
       </Canvas>
     </div>
   );
