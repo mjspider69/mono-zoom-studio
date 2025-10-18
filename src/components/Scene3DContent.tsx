@@ -17,47 +17,72 @@ export const Scene3DContent = () => {
         position={[0, 0, 0]} 
         transform 
         occlude
-        style={{ width: '100vw', height: '100vh' }}
+        zIndexRange={[100, 0]}
+        style={{ 
+          width: '100vw', 
+          height: '100vh',
+          pointerEvents: 'auto'
+        }}
       >
         <HeroSection />
       </Html>
 
-      {/* About Section - Z: -25 */}
+      {/* About Section - Z: -26 */}
       <Html 
-        position={[0, 0, -25]} 
+        position={[0, 0, -26]} 
         transform 
         occlude
-        style={{ width: '100vw', height: '100vh' }}
+        zIndexRange={[100, 0]}
+        style={{ 
+          width: '100vw', 
+          height: '100vh',
+          pointerEvents: 'auto'
+        }}
       >
         <AboutSection />
       </Html>
 
-      {/* Solutions Section - Z: -50 */}
+      {/* Solutions Section - Z: -52 */}
       <Html 
-        position={[0, 0, -50]} 
+        position={[0, 0, -52]} 
         transform 
         occlude
-        style={{ width: '100vw', height: '100vh' }}
+        zIndexRange={[100, 0]}
+        style={{ 
+          width: '100vw', 
+          height: '100vh',
+          pointerEvents: 'auto'
+        }}
       >
         <SolutionsSection />
       </Html>
 
-      {/* Projects Section - Z: -75 */}
+      {/* Projects Section - Z: -78 */}
       <Html 
-        position={[0, 0, -75]} 
+        position={[0, 0, -78]} 
         transform 
         occlude
-        style={{ width: '100vw', height: '100vh' }}
+        zIndexRange={[100, 0]}
+        style={{ 
+          width: '100vw', 
+          height: '100vh',
+          pointerEvents: 'auto'
+        }}
       >
         <ProjectsSection />
       </Html>
 
-      {/* Contact Section - Z: -100 */}
+      {/* Contact Section - Z: -104 */}
       <Html 
-        position={[0, 0, -100]} 
+        position={[0, 0, -104]} 
         transform 
         occlude
-        style={{ width: '100vw', height: '100vh' }}
+        zIndexRange={[100, 0]}
+        style={{ 
+          width: '100vw', 
+          height: '100vh',
+          pointerEvents: 'auto'
+        }}
       >
         <ContactSection />
       </Html>

@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber';
 import { ScrollControls, Scroll } from '@react-three/drei';
 import { CameraController } from './CameraController';
 import { Scene3DContent } from './Scene3DContent';
+import { Camera3DModel } from './Camera3DModel';
 
 export const Scene3D = () => {
   return (
@@ -17,6 +18,7 @@ export const Scene3D = () => {
         
         <ScrollControls pages={5} damping={0.08}>
           <CameraController />
+          <Camera3DModel />
           <Scene3DContent />
         </ScrollControls>
         

@@ -5,6 +5,7 @@ import * as THREE from 'three';
 export const DepthMarkers = () => {
   const ringRefs = useRef<THREE.Mesh[]>([]);
   const studioElementRefs = useRef<THREE.Mesh[]>([]);
+  const backdropRefs = useRef<THREE.Mesh[]>([]);
 
   useFrame((state) => {
     const time = state.clock.elapsedTime;
@@ -23,6 +24,13 @@ export const DepthMarkers = () => {
       if (element) {
         element.rotation.y += 0.001;
         element.position.y = Math.sin(time + i) * 0.2;
+      }
+    });
+
+    // Subtle backdrop movement
+    backdropRefs.current.forEach((backdrop, i) => {
+      if (backdrop) {
+        backdrop.position.y = Math.sin(time * 0.5 + i) * 0.1;
       }
     });
   });
@@ -74,37 +82,136 @@ export const DepthMarkers = () => {
       
       {/* Studio Grid Floor */}
       {depths.map((z, index) => (
-        <group key={`studio-${z}`} position={[0, -6, z]}>
+        <group key={`studio-${z}`} position={[0, -8, z]}>
           <gridHelper 
-            args={[24, 24, index % 2 === 0 ? '#ffffff' : '#111111', '#333333']} 
+            args={[30, 30, index % 2 === 0 ? '#ffffff' : '#111111', '#222222']} 
             rotation={[0, 0, 0]}
           />
           
-          {/* Studio Light Stands */}
-          {[[-10, 0], [10, 0], [0, -10], [0, 10]].map((pos, i) => (
-            <mesh 
-              key={`stand-${i}`}
-              position={[pos[0], 3, pos[1]]}
-              ref={(el) => { if (el) studioElementRefs.current[index * 4 + i] = el; }}
-            >
-              <cylinderGeometry args={[0.1, 0.1, 6, 8]} />
-              <meshStandardMaterial 
-                color={index % 2 === 0 ? '#cccccc' : '#222222'} 
-                metalness={0.7}
-                roughness={0.3}
-              />
-            </mesh>
+          {/* Studio Light Stands with Tripods */}
+          {[[-12, -12], [12, -12], [-12, 12], [12, 12]].map((pos, i) => (
+            <group key={`lightstand-${i}`} position={[pos[0], 0, pos[1]]}>
+              {/* Tripod Legs */}
+              {[0, 120, 240].map((angle) => (
+                <mesh
+                  key={`leg-${angle}`}
+                  position={[
+                    Math.cos((angle * Math.PI) / 180) * 0.3,
+                    1.5,
+                    Math.sin((angle * Math.PI) / 180) * 0.3
+                  ]}
+                  rotation={[0.3, (angle * Math.PI) / 180, 0]}
+                >
+                  <cylinderGeometry args={[0.03, 0.05, 3, 8]} />
+                  <meshStandardMaterial color="#1a1a1a" metalness={0.8} />
+                </mesh>
+              ))}
+              
+              {/* Main Stand */}
+              <mesh 
+                position={[0, 4, 0]}
+                ref={(el) => { if (el) studioElementRefs.current[index * 12 + i] = el; }}
+              >
+                <cylinderGeometry args={[0.08, 0.08, 5, 8]} />
+                <meshStandardMaterial 
+                  color={index % 2 === 0 ? '#cccccc' : '#1a1a1a'} 
+                  metalness={0.7}
+                  roughness={0.2}
+                />
+              </mesh>
+              
+              {/* Light Head */}
+              <mesh position={[0, 6.5, 0]} rotation={[Math.PI / 4, 0, 0]}>
+                <coneGeometry args={[0.4, 0.8, 8]} />
+                <meshStandardMaterial 
+                  color="#0a0a0a" 
+                  metalness={0.9}
+                  emissive="#ffffff"
+                  emissiveIntensity={0.2}
+                />
+              </mesh>
+            </group>
           ))}
           
           {/* Studio Spotlights */}
-          {[[-10, 0], [10, 0]].map((pos, i) => (
-            <pointLight
-              key={`light-${i}`}
-              position={[pos[0], 5, pos[1] + z]}
-              intensity={0.5}
-              distance={15}
-              color={index % 2 === 0 ? '#ffffff' : '#aaaaaa'}
+          {[[-12, -12], [12, -12], [-12, 12], [12, 12]].map((pos, i) => (
+            <spotLight
+              key={`spotlight-${i}`}
+              position={[pos[0], 6.5, pos[1]]}
+              angle={0.4}
+              penumbra={0.5}
+              intensity={1}
+              distance={20}
+              color={index % 2 === 0 ? '#ffffff' : '#cccccc'}
+              castShadow
             />
+          ))}
+          
+          {/* Backdrop Stands */}
+          {[[-15, 0], [15, 0]].map((pos, i) => (
+            <mesh
+              key={`backdrop-stand-${i}`}
+              position={[pos[0], 4, 0]}
+            >
+              <cylinderGeometry args={[0.12, 0.12, 8, 8]} />
+              <meshStandardMaterial color="#0a0a0a" metalness={0.8} />
+            </mesh>
+          ))}
+          
+          {/* Backdrop Cloth */}
+          <mesh 
+            position={[0, 4, 1]}
+            ref={(el) => { if (el) backdropRefs.current[index] = el; }}
+          >
+            <planeGeometry args={[30, 8]} />
+            <meshStandardMaterial 
+              color={index % 2 === 0 ? '#f0f0f0' : '#0a0a0a'} 
+              side={THREE.DoubleSide}
+              metalness={0.1}
+              roughness={0.8}
+            />
+          </mesh>
+          
+          {/* Camera Dolly Track */}
+          {[-1, 1].map((side) => (
+            <mesh 
+              key={`track-${side}`}
+              position={[side * 2, -0.5, -5]}
+              rotation={[0, 0, Math.PI / 2]}
+            >
+              <boxGeometry args={[0.1, 20, 0.2]} />
+              <meshStandardMaterial color="#2a2a2a" metalness={0.9} />
+            </mesh>
+          ))}
+          
+          {/* Reflector Boards */}
+          {[[-8, -8], [8, -8]].map((pos, i) => (
+            <group key={`reflector-${i}`} position={[pos[0], 2, pos[1]]} rotation={[0, Math.PI / 4, 0]}>
+              <mesh>
+                <planeGeometry args={[1.5, 2]} />
+                <meshStandardMaterial 
+                  color="#e0e0e0" 
+                  metalness={0.5}
+                  roughness={0.3}
+                  side={THREE.DoubleSide}
+                />
+              </mesh>
+              {/* Reflector Stand */}
+              <mesh position={[0, -1.5, 0]}>
+                <cylinderGeometry args={[0.05, 0.05, 1, 8]} />
+                <meshStandardMaterial color="#1a1a1a" />
+              </mesh>
+            </group>
+          ))}
+          
+          {/* Studio Clamps and Equipment */}
+          {[[-14, -14], [14, -14], [-14, 14], [14, 14]].map((pos, i) => (
+            <group key={`equipment-${i}`} position={[pos[0], 0, pos[1]]}>
+              <mesh position={[0, 0.3, 0]}>
+                <boxGeometry args={[0.5, 0.6, 0.5]} />
+                <meshStandardMaterial color="#3a3a3a" metalness={0.6} />
+              </mesh>
+            </group>
           ))}
         </group>
       ))}
