@@ -13,12 +13,19 @@ const values = [
   'Quality', 'Accountability', 'Passion'
 ];
 
-export const AboutSection = () => {
+interface AboutSectionProps {
+  onNavigate?: (index: number) => void;
+}
+
+export const AboutSection = ({ onNavigate }: AboutSectionProps) => {
   const handleManifestoClick = () => {
     toast({
       title: "Our Manifesto",
       description: "We believe in transforming ordinary ideas into extraordinary outcomes through creativity and innovation.",
     });
+    if (onNavigate) {
+      onNavigate(2);
+    }
   };
 
   return (
