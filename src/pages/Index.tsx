@@ -11,6 +11,14 @@ const sections = [
   { name: 'Contact', id: 4 },
 ];
 
+const SECTION_SCROLL_HEIGHTS = [
+  0,      // Home
+  0.22,   // About
+  0.44,   // Solutions
+  0.66,   // Projects
+  0.88,   // Contact
+];
+
 const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [scrollRef, setScrollRef] = useState<HTMLDivElement | null>(null);
@@ -18,7 +26,8 @@ const Index = () => {
   const handleNavigate = useCallback((sectionIndex: number) => {
     if (!scrollRef) return;
 
-    const targetScroll = (sectionIndex / 4) * (scrollRef.scrollHeight - window.innerHeight);
+    const scrollHeight = scrollRef.scrollHeight - window.innerHeight;
+    const targetScroll = SECTION_SCROLL_HEIGHTS[sectionIndex] * scrollHeight;
     scrollRef.scrollTo({ top: targetScroll, behavior: 'smooth' });
     setCurrentSection(sectionIndex);
   }, [scrollRef]);
