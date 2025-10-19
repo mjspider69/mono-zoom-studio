@@ -6,25 +6,29 @@ import { ProjectsSection } from './sections/ProjectsSection';
 import { ContactSection } from './sections/ContactSection';
 import { DepthMarkers } from './DepthMarkers';
 
-export const Scene3DContent = () => {
+interface Scene3DContentProps {
+  onExplore?: () => void;
+}
+
+export const Scene3DContent = ({ onExplore }: Scene3DContentProps) => {
   return (
     <>
       {/* Depth markers to show 3D space */}
       <DepthMarkers />
 
       {/* Home Section - Z: 0 */}
-      <Html 
-        position={[0, 0, 0]} 
-        transform 
+      <Html
+        position={[0, 0, 0]}
+        transform
         occlude
         zIndexRange={[100, 0]}
-        style={{ 
-          width: '100vw', 
+        style={{
+          width: '100vw',
           height: '100vh',
           pointerEvents: 'auto'
         }}
       >
-        <HeroSection />
+        <HeroSection onExplore={onExplore} />
       </Html>
 
       {/* About Section - Z: -25 */}
