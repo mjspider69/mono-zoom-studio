@@ -3,11 +3,11 @@ import { Scene3D } from '@/components/Scene3D';
 import { Toaster } from '@/components/ui/toaster';
 
 const SECTION_SCROLL_HEIGHTS = [
-  0,          // Home - start at top
-  0.05,       // About - with padding for bidirectional visibility
-  0.12,       // Solutions - with padding
-  0.185,      // Projects - with padding
-  0.25,       // Contact - with padding
+  0,          // Home (0/15)
+  0.067,      // About (1/15) - expanded for better scroll visibility
+  0.133,      // Solutions (2/15) - expanded
+  0.2,        // Projects (3/15) - expanded
+  0.267,      // Contact (4/15) - expanded for final padding
 ];
 
 const Index = () => {
