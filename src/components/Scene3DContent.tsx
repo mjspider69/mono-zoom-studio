@@ -11,13 +11,14 @@ interface Scene3DContentProps {
   onNavigate?: (index: number) => void;
 }
 
-// Z-positions with 27.5 unit spacing per page (220 / 8 = 27.5)
+// Z-positions with 30 unit spacing per page (240 / 8 = 30)
+// These positions are coordinated with the expanded anchor heights for seamless bidirectional visibility
 const SECTION_POSITIONS = [
-  0,        // Home (0 * 27.5)
-  -27.5,    // About (1 * 27.5)
-  -55,      // Solutions (2 * 27.5)
-  -82.5,    // Projects (3 * 27.5)
-  -110,     // Contact (4 * 27.5)
+  0,        // Home (0 * 30)
+  -30,      // About (1 * 30)
+  -60,      // Solutions (2 * 30)
+  -90,      // Projects (3 * 30)
+  -120,     // Contact (4 * 30)
 ];
 
 export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) => {
