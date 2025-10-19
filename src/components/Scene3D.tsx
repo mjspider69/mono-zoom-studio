@@ -6,9 +6,10 @@ import { Camera3DModel } from './Camera3DModel';
 
 interface Scene3DProps {
   onExplore?: () => void;
+  onNavigate?: (index: number) => void;
 }
 
-export const Scene3D = ({ onExplore }: Scene3DProps) => {
+export const Scene3D = ({ onExplore, onNavigate }: Scene3DProps) => {
   return (
     <div className="fixed inset-0 w-full h-full">
       <Canvas camera={{ position: [0, 0, 10], fov: 75 }}>
@@ -23,7 +24,7 @@ export const Scene3D = ({ onExplore }: Scene3DProps) => {
         <ScrollControls pages={5} damping={0.1}>
           <CameraController />
           <Camera3DModel />
-          <Scene3DContent onExplore={onExplore} />
+          <Scene3DContent onExplore={onExplore} onNavigate={onNavigate} />
         </ScrollControls>
 
         {/* Atmospheric fog for depth */}

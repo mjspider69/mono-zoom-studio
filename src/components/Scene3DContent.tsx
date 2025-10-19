@@ -8,9 +8,10 @@ import { DepthMarkers } from './DepthMarkers';
 
 interface Scene3DContentProps {
   onExplore?: () => void;
+  onNavigate?: (index: number) => void;
 }
 
-export const Scene3DContent = ({ onExplore }: Scene3DContentProps) => {
+export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) => {
   return (
     <>
       {/* Depth markers to show 3D space */}
@@ -32,63 +33,63 @@ export const Scene3DContent = ({ onExplore }: Scene3DContentProps) => {
       </Html>
 
       {/* About Section - Z: -25 */}
-      <Html 
-        position={[0, 0, -25]} 
-        transform 
+      <Html
+        position={[0, 0, -25]}
+        transform
         occlude
         zIndexRange={[100, 0]}
-        style={{ 
-          width: '100vw', 
+        style={{
+          width: '100vw',
           height: '100vh',
           pointerEvents: 'auto'
         }}
       >
-        <AboutSection />
+        <AboutSection onNavigate={onNavigate} />
       </Html>
 
       {/* Services Section - Z: -50 */}
-      <Html 
-        position={[0, 0, -50]} 
-        transform 
+      <Html
+        position={[0, 0, -50]}
+        transform
         occlude
         zIndexRange={[100, 0]}
-        style={{ 
-          width: '100vw', 
+        style={{
+          width: '100vw',
           height: '100vh',
           pointerEvents: 'auto'
         }}
       >
-        <SolutionsSection />
+        <SolutionsSection onNavigate={onNavigate} />
       </Html>
 
       {/* Projects Section - Z: -75 */}
-      <Html 
-        position={[0, 0, -75]} 
-        transform 
+      <Html
+        position={[0, 0, -75]}
+        transform
         occlude
         zIndexRange={[100, 0]}
-        style={{ 
-          width: '100vw', 
+        style={{
+          width: '100vw',
           height: '100vh',
           pointerEvents: 'auto'
         }}
       >
-        <ProjectsSection />
+        <ProjectsSection onNavigate={onNavigate} />
       </Html>
 
       {/* Contact Section - Z: -100 */}
-      <Html 
-        position={[0, 0, -100]} 
-        transform 
+      <Html
+        position={[0, 0, -100]}
+        transform
         occlude
         zIndexRange={[100, 0]}
-        style={{ 
-          width: '100vw', 
+        style={{
+          width: '100vw',
           height: '100vh',
           pointerEvents: 'auto'
         }}
       >
-        <ContactSection />
+        <ContactSection onNavigate={onNavigate} />
       </Html>
     </>
   );

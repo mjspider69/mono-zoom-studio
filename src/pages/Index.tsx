@@ -53,7 +53,7 @@ const Index = () => {
       className="relative w-screen h-screen overflow-y-scroll overflow-x-hidden"
       onScroll={handleScroll}
     >
-      <Scene3D onExplore={handleExplore} />
+      <Scene3D onExplore={handleExplore} onNavigate={handleNavigate} />
       <Navigation onNavigate={handleNavigate} currentSection={currentSection} />
       <Toaster />
 
