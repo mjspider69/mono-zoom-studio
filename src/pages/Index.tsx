@@ -12,11 +12,11 @@ const sections = [
 ];
 
 const SECTION_SCROLL_HEIGHTS = [
-  0,      // Home
-  0.22,   // About
-  0.44,   // Solutions
-  0.66,   // Projects
-  0.88,   // Contact
+  0,       // Home (0/8)
+  0.125,   // About (1/8)
+  0.25,    // Solutions (2/8)
+  0.375,   // Projects (3/8)
+  0.5,     // Contact (4/8)
 ];
 
 const Index = () => {
