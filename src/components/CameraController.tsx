@@ -6,32 +6,26 @@ export const CameraController = () => {
   const scroll = useScroll();
   const { camera } = useThree();
 
-  useFrame((state) => {
+  useFrame(() => {
     const offset = scroll.offset;
     
-    // Calculate camera position - move through each section ring
-    // Each section is 25 units apart: 0, -25, -50, -75, -100
-    // Slow down movement to see each page fully
-    const targetZ = 10 - (offset * 130); // Extended range with slower progression
+    // Smooth traveling movie camera movement through 5 sections
+    // Sections at: Z=0, Z=-25, Z=-50, Z=-75, Z=-100
+    // Camera starts at Z=10 and travels to Z=-110
+    const targetZ = 10 - (offset * 120);
     
-    // Very smooth camera movement for cinematic feel
-    camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.06);
+    // Ultra-smooth cinematic camera movement
+    camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.05);
     
-    // Camera lens rolling effect - simulate lens rotation while zooming
-    const rollIntensity = offset * Math.PI * 6; // More visible rotations
-    camera.rotation.z = Math.sin(rollIntensity) * 0.12; // Reduced rolling for stability
+    // Keep camera steady - no rotation for clean viewing
+    camera.position.y = 0;
+    camera.position.x = 0;
+    camera.rotation.x = 0;
+    camera.rotation.y = 0;
+    camera.rotation.z = 0;
     
-    // Minimal vertical movement to keep pages centered
-    camera.position.y = Math.sin(offset * Math.PI * 2) * 0.2;
-    
-    // Minimal horizontal movement
-    camera.position.x = Math.cos(offset * Math.PI * 2) * 0.15;
-    
-    // Very gentle pitch
-    camera.rotation.x = Math.sin(offset * Math.PI) * 0.04;
-    
-    // Look straight ahead at the current section
-    camera.lookAt(0, 0, camera.position.z - 15);
+    // Look straight ahead
+    camera.lookAt(0, 0, targetZ - 10);
   });
 
   return null;

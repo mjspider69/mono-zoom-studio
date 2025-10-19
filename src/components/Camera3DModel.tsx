@@ -6,25 +6,35 @@ import * as THREE from 'three';
 export const Camera3DModel = () => {
   const cameraBodyRef = useRef<THREE.Group>(null);
   const lensRef = useRef<THREE.Mesh>(null);
+  const apertureRef = useRef<THREE.Group>(null);
   const scroll = useScroll();
 
   useFrame(() => {
     const offset = scroll.offset;
     
     if (cameraBodyRef.current) {
-      // Position camera model to follow viewport camera
-      cameraBodyRef.current.position.z = 5 - (offset * 125) - 8;
-      cameraBodyRef.current.position.y = 2;
-      cameraBodyRef.current.position.x = -6;
+      // Position DSLR camera in front of viewer at the start
+      // As user scrolls, camera moves aside
+      const initialZ = 0;
+      const moveAmount = offset * 30;
       
-      // Rotate entire camera body slightly
-      cameraBodyRef.current.rotation.y = -0.3 + offset * 0.5;
-      cameraBodyRef.current.rotation.x = -0.1;
+      cameraBodyRef.current.position.z = initialZ - moveAmount;
+      cameraBodyRef.current.position.y = 0;
+      cameraBodyRef.current.position.x = 3 + (offset * 5); // Move to the side
+      
+      // Rotate camera as it moves aside
+      cameraBodyRef.current.rotation.y = -Math.PI / 4 - offset * 0.5;
     }
     
-    // Lens rolling effect
+    // Lens rolling effect - continuous rotation
     if (lensRef.current) {
-      lensRef.current.rotation.z = offset * Math.PI * 8; // Multiple rotations
+      lensRef.current.rotation.z = offset * Math.PI * 12;
+    }
+    
+    // Aperture blades animation
+    if (apertureRef.current) {
+      const openAmount = Math.min(offset * 3, 1);
+      apertureRef.current.scale.set(1 - openAmount * 0.5, 1 - openAmount * 0.5, 1);
     }
   });
 
@@ -83,26 +93,28 @@ export const Camera3DModel = () => {
       </mesh>
       
       {/* Lens Aperture Blades */}
-      {[...Array(8)].map((_, i) => {
-        const angle = (i / 8) * Math.PI * 2;
-        return (
-          <mesh 
-            key={`aperture-${i}`}
-            position={[
-              Math.cos(angle) * 0.3, 
-              Math.sin(angle) * 0.3, 
-              -2.2
-            ]}
-            rotation={[0, 0, angle]}
-          >
-            <boxGeometry args={[0.02, 0.3, 0.05]} />
-            <meshStandardMaterial 
-              color="#666666" 
-              metalness={0.8}
-            />
-          </mesh>
-        );
-      })}
+      <group ref={apertureRef}>
+        {[...Array(8)].map((_, i) => {
+          const angle = (i / 8) * Math.PI * 2;
+          return (
+            <mesh 
+              key={`aperture-${i}`}
+              position={[
+                Math.cos(angle) * 0.3, 
+                Math.sin(angle) * 0.3, 
+                -2.2
+              ]}
+              rotation={[0, 0, angle]}
+            >
+              <boxGeometry args={[0.02, 0.3, 0.05]} />
+              <meshStandardMaterial 
+                color="#666666" 
+                metalness={0.8}
+              />
+            </mesh>
+          );
+        })}
+      </group>
       
       {/* Lens Hood */}
       <mesh position={[0, 0, -2.8]} rotation={[Math.PI / 2, 0, 0]}>

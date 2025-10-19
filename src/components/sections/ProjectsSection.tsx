@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { toast } from '@/hooks/use-toast';
 import project1 from '@/assets/project-1.jpg';
 import project2 from '@/assets/project-2.jpg';
 import project3 from '@/assets/project-3.jpg';
@@ -7,83 +9,51 @@ import project5 from '@/assets/project-5.jpg';
 import project6 from '@/assets/project-6.jpg';
 
 const projects = [
-  {
-    title: 'Brand Campaign',
-    category: 'Social Media',
-    image: project1
-  },
-  {
-    title: 'Product Launch',
-    category: 'Marketing',
-    image: project2
-  },
-  {
-    title: 'Digital Strategy',
-    category: 'Content Creation',
-    image: project3
-  },
-  {
-    title: 'Visual Identity',
-    category: 'Branding',
-    image: project4
-  },
-  {
-    title: 'Engagement Campaign',
-    category: 'Social Media',
-    image: project5
-  },
-  {
-    title: 'Creative Direction',
-    category: 'Photography',
-    image: project6
-  }
+  { title: 'Brand Campaign', category: 'Marketing', image: project1 },
+  { title: 'E-commerce Platform', category: 'Development', image: project2 },
+  { title: 'Social Media Strategy', category: 'Social Media', image: project3 },
+  { title: 'Product Photography', category: 'Photography', image: project4 },
+  { title: 'Video Production', category: 'Videography', image: project5 },
+  { title: 'SEO Campaign', category: 'SEO', image: project6 },
 ];
 
 export const ProjectsSection = () => {
+  const handleViewProject = (project: string) => {
+    toast({
+      title: project,
+      description: "Explore this project in our portfolio.",
+    });
+  };
+
   return (
-    <div className="w-screen h-screen bg-foreground text-background overflow-y-auto py-12 px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.h2 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-5xl md:text-7xl font-light mb-12 tracking-tight"
-        >
-          OUR WORK
-        </motion.h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
-              whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-              whileHover={{ scale: 1.05, rotateY: 5 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
-                type: "spring",
-                stiffness: 100
-              }}
-              className="group cursor-pointer perspective-1000"
-            >
-              <div className="overflow-hidden border border-background/20 mb-4 transform-gpu">
-                <motion.img 
+    <div className="w-screen h-screen flex items-center justify-center bg-background px-4 py-12 overflow-y-auto">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12">
+          Picture Perfect: Our Portfolio
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project) => (
+            <Card key={project.title} className="overflow-hidden group cursor-pointer">
+              <div className="relative aspect-video overflow-hidden">
+                <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-64 object-cover"
-                  whileHover={{ scale: 1.15, rotate: 2 }}
-                  transition={{ duration: 0.5 }}
+                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Button 
+                    onClick={() => handleViewProject(project.title)}
+                    variant="secondary"
+                  >
+                    View Project
+                  </Button>
+                </div>
               </div>
-              <motion.h3 
-                className="text-xl font-light tracking-tight mb-2"
-                whileHover={{ x: 8 }}
-                transition={{ duration: 0.3 }}
-              >
-                {project.title}
-              </motion.h3>
-              <p className="text-sm uppercase tracking-wider opacity-60">{project.category}</p>
-            </motion.div>
+              <div className="p-4">
+                <h3 className="text-lg font-light">{project.title}</h3>
+                <p className="text-sm text-muted-foreground">{project.category}</p>
+              </div>
+            </Card>
           ))}
         </div>
       </div>
