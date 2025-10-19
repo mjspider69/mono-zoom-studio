@@ -1,38 +1,38 @@
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
-import { Search, Share2, Code, FileText, Camera, TrendingUp } from 'lucide-react';
+import { Target, Share2, Code, FileText, Camera, TrendingUp } from 'lucide-react';
 
 const services = [
   {
-    icon: Search,
-    title: 'SEO Optimization',
-    description: 'Boost your visibility with strategic search engine optimization.',
-  },
-  {
-    icon: FileText,
-    title: 'Content Marketing',
-    description: 'Compelling content that engages and converts your audience.',
+    icon: Target,
+    title: 'Lead Generation',
+    description: 'Strategic campaigns to generate high-quality leads and drive conversions through targeted marketing.',
   },
   {
     icon: Share2,
     title: 'Social Media Marketing',
-    description: 'Build brand awareness across all major social platforms.',
+    description: 'Build brand awareness and engage audiences across all major social platforms with creative content.',
   },
   {
     icon: Code,
     title: 'Software Development',
-    description: 'Custom web and mobile solutions tailored to your needs.',
+    description: 'Custom web and mobile applications tailored to your business needs with cutting-edge technology.',
+  },
+  {
+    icon: FileText,
+    title: 'Content Creation',
+    description: 'Compelling, SEO-optimized content that engages your audience and tells your brand story.',
   },
   {
     icon: Camera,
     title: 'Photography & Videography',
-    description: 'Professional visual content that tells your story.',
+    description: 'Professional visual content production including product shoots, corporate videos, and brand films.',
   },
   {
     icon: TrendingUp,
     title: 'Performance Marketing',
-    description: 'Data-driven campaigns that maximize your ROI.',
+    description: 'Data-driven campaigns optimized for maximum ROI across all digital channels.',
   },
 ];
 

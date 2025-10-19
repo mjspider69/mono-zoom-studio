@@ -9,19 +9,19 @@ import project5 from '@/assets/project-5.jpg';
 import project6 from '@/assets/project-6.jpg';
 
 const projects = [
-  { title: 'Brand Campaign', category: 'Marketing', image: project1 },
-  { title: 'E-commerce Platform', category: 'Development', image: project2 },
-  { title: 'Social Media Strategy', category: 'Social Media', image: project3 },
-  { title: 'Product Photography', category: 'Photography', image: project4 },
-  { title: 'Video Production', category: 'Videography', image: project5 },
-  { title: 'SEO Campaign', category: 'SEO', image: project6 },
+  { title: 'Brand Relaunch Campaign', category: 'Brand Strategy', image: project1 },
+  { title: 'E-Commerce Strategy', category: 'Digital Commerce', image: project2 },
+  { title: 'Visual Identity Design', category: 'Branding', image: project3 },
+  { title: 'Product Launch Campaign', category: 'Marketing', image: project4 },
+  { title: 'Social Media Transformation', category: 'Social Media', image: project5 },
+  { title: 'Corporate Video Series', category: 'Video Production', image: project6 },
 ];
 
 export const ProjectsSection = () => {
   const handleViewProject = (project: string) => {
     toast({
-      title: project,
-      description: "Explore this project in our portfolio.",
+      title: "Case Study",
+      description: `Viewing ${project} - Explore this project in our portfolio.`,
     });
   };
 
@@ -45,7 +45,7 @@ export const ProjectsSection = () => {
                     onClick={() => handleViewProject(project.title)}
                     variant="secondary"
                   >
-                    View Project
+                    View Case Study
                   </Button>
                 </div>
               </div>
