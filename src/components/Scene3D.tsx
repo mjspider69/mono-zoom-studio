@@ -21,7 +21,7 @@ export const Scene3D = ({ onExplore, onNavigate }: Scene3DProps) => {
         <directionalLight position={[-10, 10, -5]} intensity={0.8} color="#f5f5f5" />
         <spotLight position={[0, 15, 0]} intensity={1.2} angle={0.4} penumbra={1} color="#ffffff" />
 
-        <ScrollControls pages={9} damping={0.1}>
+        <ScrollControls pages={8} damping={0.1}>
           <CameraController />
           <Camera3DModel />
           <Scene3DContent onExplore={onExplore} onNavigate={onNavigate} />

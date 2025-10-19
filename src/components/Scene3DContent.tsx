@@ -11,15 +11,24 @@ interface Scene3DContentProps {
   onNavigate?: (index: number) => void;
 }
 
+// Z-positions with 13.75 unit spacing per page (110 / 8 = 13.75)
+const SECTION_POSITIONS = [
+  0,        // Home (0 * 13.75)
+  -13.75,   // About (1 * 13.75)
+  -27.5,    // Solutions (2 * 13.75)
+  -41.25,   // Projects (3 * 13.75)
+  -55,      // Contact (4 * 13.75)
+];
+
 export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) => {
   return (
     <>
       {/* Depth markers to show 3D space */}
-      <DepthMarkers />
+      <DepthMarkers maxZ={110} />
 
       {/* Home Section - Z: 0 */}
       <Html
-        position={[0, 0, 0]}
+        position={[0, 0, SECTION_POSITIONS[0]]}
         transform
         occlude
         zIndexRange={[100, 0]}
@@ -32,9 +41,9 @@ export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) =
         <HeroSection onExplore={onExplore} />
       </Html>
 
-      {/* About Section - Z: -25 */}
+      {/* About Section - Z: -13.75 */}
       <Html
-        position={[0, 0, -25]}
+        position={[0, 0, SECTION_POSITIONS[1]]}
         transform
         occlude
         zIndexRange={[100, 0]}
@@ -47,9 +56,9 @@ export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) =
         <AboutSection onNavigate={onNavigate} />
       </Html>
 
-      {/* Services Section - Z: -50 */}
+      {/* Services Section - Z: -27.5 */}
       <Html
-        position={[0, 0, -50]}
+        position={[0, 0, SECTION_POSITIONS[2]]}
         transform
         occlude
         zIndexRange={[100, 0]}
@@ -62,9 +71,9 @@ export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) =
         <SolutionsSection onNavigate={onNavigate} />
       </Html>
 
-      {/* Projects Section - Z: -75 */}
+      {/* Projects Section - Z: -41.25 */}
       <Html
-        position={[0, 0, -75]}
+        position={[0, 0, SECTION_POSITIONS[3]]}
         transform
         occlude
         zIndexRange={[100, 0]}
@@ -77,9 +86,9 @@ export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) =
         <ProjectsSection onNavigate={onNavigate} />
       </Html>
 
-      {/* Contact Section - Z: -100 */}
+      {/* Contact Section - Z: -55 */}
       <Html
-        position={[0, 0, -100]}
+        position={[0, 0, SECTION_POSITIONS[4]]}
         transform
         occlude
         zIndexRange={[100, 0]}

@@ -10,9 +10,9 @@ export const CameraController = () => {
     const offset = scroll.offset;
 
     // Smooth traveling movie camera movement through 5 sections
-    // Sections at: Z=0, Z=-25, Z=-50, Z=-75, Z=-100
-    // Camera starts at Z=10 and travels across 9 virtual pages
-    const maxZDistance = 120;
+    // Sections at: Z=0, Z≈-13.75, Z≈-27.5, Z≈-41.25, Z≈-55
+    // Camera starts at Z=10 and travels across 8 virtual pages
+    const maxZDistance = 110;
     const targetZ = 10 - (offset * maxZDistance);
 
     // Snappier cinematic camera movement with tighter lerp
