@@ -2,116 +2,117 @@ import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-export const DepthMarkers = () => {
-  const gridRefs = useRef<THREE.GridHelper[]>([]);
-  const lightStandRefs = useRef<THREE.Group[]>([]);
+interface DepthMarkersProps {
+  maxZ: number;
+}
+
+export const DepthMarkers = ({ maxZ }: DepthMarkersProps) => {
+  const ringRefs = useRef<THREE.Mesh[]>([]);
+  const studioElementRefs = useRef<THREE.Mesh[]>([]);
+  const backdropRefs = useRef<THREE.Mesh[]>([]);
 
   useFrame((state) => {
-    const time = state.clock.getElapsedTime();
-    
-    // Subtle animation for grids
-    gridRefs.current.forEach((grid, i) => {
-      if (grid) {
-        grid.rotation.y = time * 0.05 + i * 0.1;
+    const time = state.clock.elapsedTime;
+
+    // Rotate camera lens rings
+    ringRefs.current.forEach((ring, i) => {
+      if (ring) {
+        ring.rotation.z += 0.002 * (i + 1);
+        // Pulsing effect for lens aperture simulation
+        ring.scale.setScalar(1 + Math.sin(time * 2 + i) * 0.05);
       }
     });
-    
-    // Gentle sway for light stands
-    lightStandRefs.current.forEach((stand, i) => {
-      if (stand) {
-        stand.rotation.z = Math.sin(time + i) * 0.02;
+
+    // Animate studio elements
+    studioElementRefs.current.forEach((element, i) => {
+      if (element) {
+        element.rotation.y += 0.001;
+        element.position.y = Math.sin(time + i) * 0.2;
+      }
+    });
+
+    // Subtle backdrop movement
+    backdropRefs.current.forEach((backdrop, i) => {
+      if (backdrop) {
+        backdrop.position.y = Math.sin(time * 0.5 + i) * 0.1;
       }
     });
   });
 
-  const sections = [
-    { z: 0, label: 'Home' },
-    { z: -25, label: 'About' },
-    { z: -50, label: 'Services' },
-    { z: -75, label: 'Projects' },
-    { z: -100, label: 'Contact' },
-  ];
+  // Create markers based on the new maxZ range
+  const depths = [0, -maxZ/4, -maxZ/2, -maxZ*3/4, -maxZ];
 
   return (
     <>
-      {sections.map((section, index) => (
-        <group key={section.label} position={[0, 0, section.z]}>
-          {/* Studio floor grid */}
-          <gridHelper
-            ref={(el) => {
-              if (el) gridRefs.current[index] = el;
-            }}
-            args={[30, 30, '#333333', '#1a1a1a']}
-            position={[0, -5, 0]}
-          />
-          
-          {/* Light stand on the left */}
-          <group
-            ref={(el) => {
-              if (el) lightStandRefs.current[index * 2] = el;
-            }}
-            position={[-8, 0, 0]}
+      {/* Camera Lens Rings - simulate camera aperture */}
+      {depths.map((z, index) => (
+        <group key={`lens-${z}`} position={[0, 0, z]}>
+          {/* Main lens ring */}
+          <mesh
+            ref={(el) => { if (el) ringRefs.current[index] = el; }}
           >
-            <mesh position={[0, -2, 0]}>
-              <cylinderGeometry args={[0.05, 0.15, 4, 8]} />
-              <meshStandardMaterial color="#1a1a1a" metalness={0.8} />
-            </mesh>
-            <mesh position={[0, 1, 0]}>
-              <cylinderGeometry args={[0.3, 0.1, 1, 8]} />
-              <meshStandardMaterial color="#2a2a2a" metalness={0.6} />
-            </mesh>
-            <pointLight position={[0, 1.5, 0]} intensity={0.5} color="#ffffff" distance={10} />
-          </group>
-          
-          {/* Light stand on the right */}
-          <group
-            ref={(el) => {
-              if (el) lightStandRefs.current[index * 2 + 1] = el;
-            }}
-            position={[8, 0, 0]}
-          >
-            <mesh position={[0, -2, 0]}>
-              <cylinderGeometry args={[0.05, 0.15, 4, 8]} />
-              <meshStandardMaterial color="#1a1a1a" metalness={0.8} />
-            </mesh>
-            <mesh position={[0, 1, 0]}>
-              <cylinderGeometry args={[0.3, 0.1, 1, 8]} />
-              <meshStandardMaterial color="#2a2a2a" metalness={0.6} />
-            </mesh>
-            <pointLight position={[0, 1.5, 0]} intensity={0.5} color="#ffffff" distance={10} />
-          </group>
-          
-          {/* Backdrop frame */}
-          <mesh position={[0, 0, -3]}>
-            <boxGeometry args={[16, 10, 0.1]} />
-            <meshStandardMaterial 
-              color="#0a0a0a" 
-              metalness={0.3} 
-              roughness={0.7}
+            <torusGeometry args={[10, 0.08, 16, 64]} />
+            <meshStandardMaterial
+              color={index % 2 === 0 ? '#ffffff' : '#000000'}
               transparent
-              opacity={0.3}
+              opacity={0.5}
+              metalness={0.8}
+              roughness={0.2}
+              emissive={index % 2 === 0 ? '#ffffff' : '#000000'}
+              emissiveIntensity={0.3}
             />
           </mesh>
-          
-          {/* Corner frame markers */}
-          {[
-            [-7, 4, -2.9],
-            [7, 4, -2.9],
-            [-7, -4, -2.9],
-            [7, -4, -2.9],
-          ].map((pos, i) => (
-            <mesh key={`corner-${i}`} position={pos as [number, number, number]}>
-              <boxGeometry args={[0.5, 0.5, 0.05]} />
-              <meshStandardMaterial color="#ffffff" metalness={0.9} />
+
+          {/* Inner lens aperture blades */}
+          {[...Array(8)].map((_, i) => {
+            const angle = (i / 8) * Math.PI * 2;
+            return (
+              <mesh
+                key={`blade-${i}`}
+                position={[Math.cos(angle) * 9, Math.sin(angle) * 9, 0]}
+                rotation={[0, 0, angle]}
+                ref={(el) => { if (el) studioElementRefs.current[index * 8 + i] = el; }}
+              >
+                <boxGeometry args={[0.1, 2, 0.05]} />
+                <meshStandardMaterial
+                  color={index % 2 === 0 ? '#cccccc' : '#333333'}
+                  metalness={0.9}
+                  roughness={0.1}
+                />
+              </mesh>
+            );
+          })}
+        </group>
+      ))}
+
+      {/* Studio Grid Floor (Only place it once at the starting point for visual reference) */}
+      <group position={[0, -8, 0]}>
+        <gridHelper
+          args={[30, 30, '#111111', '#222222']}
+          rotation={[0, 0, 0]}
+        />
+      </group>
+
+      {/* Floating frame corners (Placed at start and end for cinematic frame effect) */}
+      {[0, -maxZ].map((z, index) => (
+        <group key={`frame-${z}`} position={[0, 0, z]}>
+          {[[-12, 8], [12, 8], [-12, -8], [12, -8]].map((pos, i) => (
+            <mesh
+              key={`corner-${i}`}
+              position={[pos[0], pos[1], 0]}
+              ref={(el) => { if (el) backdropRefs.current[index * 4 + i] = el; }}
+            >
+              <boxGeometry args={[0.5, 0.5, 0.1]} />
+              <meshStandardMaterial
+                color={index === 0 ? '#ffffff' : '#000000'}
+                transparent
+                opacity={0.6}
+                metalness={0.8}
+              />
             </mesh>
           ))}
         </group>
       ))}
-      
-      {/* Ambient studio elements */}
-      <spotLight position={[0, 15, -50]} intensity={2} angle={0.5} penumbra={1} color="#ffffff" />
-      <spotLight position={[10, 10, -25]} intensity={1.5} angle={0.4} penumbra={1} color="#f0f0f0" />
-      <spotLight position={[-10, 10, -75]} intensity={1.5} angle={0.4} penumbra={1} color="#f0f0f0" />
     </>
   );
 };

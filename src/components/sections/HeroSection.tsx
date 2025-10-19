@@ -29,10 +29,18 @@ const testimonials = [
   }
 ];
 
-export const HeroSection = () => {
+interface HeroSectionProps {
+  onExplore?: () => void;
+}
+
+export const HeroSection = ({ onExplore }: HeroSectionProps) => {
   const handleExploreClick = () => {
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    window.scrollTo({ top: scrollHeight * 0.2, behavior: 'smooth' });
+    if (onExplore) {
+      onExplore();
+    } else {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo({ top: scrollHeight * 0.2, behavior: 'smooth' });
+    }
   };
 
   return (

@@ -36,12 +36,19 @@ const services = [
   },
 ];
 
-export const SolutionsSection = () => {
+interface SolutionsSectionProps {
+  onNavigate?: (index: number) => void;
+}
+
+export const SolutionsSection = ({ onNavigate }: SolutionsSectionProps) => {
   const handleViewDetails = (service: string) => {
     toast({
       title: service,
       description: "Our team will create a custom solution tailored to your needs.",
     });
+    if (onNavigate) {
+      onNavigate(3);
+    }
   };
 
   return (

@@ -5,7 +5,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
 import { Mail, Phone } from 'lucide-react';
 
-export const ContactSection = () => {
+interface ContactSectionProps {
+  onNavigate?: (index: number) => void;
+}
+
+export const ContactSection = ({ onNavigate }: ContactSectionProps) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,6 +23,9 @@ export const ContactSection = () => {
       description: "Thank you for reaching out. We'll get back to you soon.",
     });
     setFormData({ name: '', email: '', message: '' });
+    if (onNavigate) {
+      setTimeout(() => onNavigate(0), 1500);
+    }
   };
 
   return (

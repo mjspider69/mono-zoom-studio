@@ -17,12 +17,19 @@ const projects = [
   { title: 'Corporate Video Series', category: 'Video Production', image: project6 },
 ];
 
-export const ProjectsSection = () => {
+interface ProjectsSectionProps {
+  onNavigate?: (index: number) => void;
+}
+
+export const ProjectsSection = ({ onNavigate }: ProjectsSectionProps) => {
   const handleViewProject = (project: string) => {
     toast({
       title: "Case Study",
       description: `Viewing ${project} - Explore this project in our portfolio.`,
     });
+    if (onNavigate) {
+      onNavigate(4);
+    }
   };
 
   return (
