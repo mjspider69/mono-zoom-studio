@@ -3,11 +3,11 @@ import { Scene3D } from '@/components/Scene3D';
 import { Toaster } from '@/components/ui/toaster';
 
 const SECTION_SCROLL_HEIGHTS = [
-  0,        // Home (0/8)
-  0.125,    // About (1/8)
-  0.25,     // Solutions (2/8)
-  0.375,    // Projects (3/8)
-  0.5,      // Contact (4/8)
+  0,          // Home (0/15)
+  0.0667,     // About (1/15)
+  0.1333,     // Solutions (2/15)
+  0.2,        // Projects (3/15)
+  0.2667,     // Contact (4/15)
 ];
 
 const Index = () => {

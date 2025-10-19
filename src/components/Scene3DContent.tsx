@@ -11,20 +11,20 @@ interface Scene3DContentProps {
   onNavigate?: (index: number) => void;
 }
 
-// Z-positions with 13.75 unit spacing per page (110 / 8 = 13.75)
+// Z-positions with 27.5 unit spacing per page (220 / 8 = 27.5)
 const SECTION_POSITIONS = [
-  0,        // Home (0 * 13.75)
-  -13.75,   // About (1 * 13.75)
-  -27.5,    // Solutions (2 * 13.75)
-  -41.25,   // Projects (3 * 13.75)
-  -55,      // Contact (4 * 13.75)
+  0,        // Home (0 * 27.5)
+  -27.5,    // About (1 * 27.5)
+  -55,      // Solutions (2 * 27.5)
+  -82.5,    // Projects (3 * 27.5)
+  -110,     // Contact (4 * 27.5)
 ];
 
 export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) => {
   return (
     <>
       {/* Depth markers to show 3D space */}
-      <DepthMarkers maxZ={110} />
+      <DepthMarkers maxZ={220} />
 
       {/* Home Section - Z: 0 */}
       <Html
