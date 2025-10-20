@@ -27,9 +27,9 @@ export const Scene3DContent = () => {
         <HeroSection />
       </Html>
 
-      {/* About Section - Z: -25 */}
+      {/* About Section - Z: -47.5 */}
       <Html 
-        position={[0, 0, -25]} 
+        position={[0, 0, -47.5]} 
         transform 
         occlude
         zIndexRange={[100, 0]}
@@ -42,9 +42,9 @@ export const Scene3DContent = () => {
         <AboutSection />
       </Html>
 
-      {/* Services Section - Z: -50 */}
+      {/* Services Section - Z: -95 */}
       <Html 
-        position={[0, 0, -50]} 
+        position={[0, 0, -95]} 
         transform 
         occlude
         zIndexRange={[100, 0]}
@@ -57,9 +57,9 @@ export const Scene3DContent = () => {
         <SolutionsSection />
       </Html>
 
-      {/* Projects Section - Z: -75 */}
+      {/* Projects Section - Z: -142.5 */}
       <Html 
-        position={[0, 0, -75]} 
+        position={[0, 0, -142.5]} 
         transform 
         occlude
         zIndexRange={[100, 0]}
@@ -72,9 +72,9 @@ export const Scene3DContent = () => {
         <ProjectsSection />
       </Html>
 
-      {/* Contact Section - Z: -100 */}
+      {/* Contact Section - Z: -190 */}
       <Html 
-        position={[0, 0, -100]} 
+        position={[0, 0, -190]}
         transform 
         occlude
         zIndexRange={[100, 0]}

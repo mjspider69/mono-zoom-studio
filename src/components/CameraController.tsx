@@ -10,9 +10,9 @@ export const CameraController = () => {
     const offset = scroll.offset;
     
     // Smooth traveling movie camera movement through 5 sections
-    // Sections at: Z=0, Z=-25, Z=-50, Z=-75, Z=-100
-    // Camera starts at Z=10 and travels to Z=-110
-    const targetZ = 10 - (offset * 120);
+    // Expanded scroll range for bidirectional viewing
+    // Camera starts at Z=10 and travels to Z=-370 (380 units total)
+    const targetZ = 10 - (offset * 380);
     
     // Ultra-smooth cinematic camera movement
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.05);
