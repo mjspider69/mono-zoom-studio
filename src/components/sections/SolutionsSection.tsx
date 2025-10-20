@@ -1,7 +1,8 @@
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { AnimatedButton } from '@/components/AnimatedButton';
+import { AnimatedCard } from '@/components/AnimatedCard';
 import { toast } from '@/hooks/use-toast';
 import { Target, Share2, Code, FileText, Camera, TrendingUp } from 'lucide-react';
+import { useTextReveal, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 
 const services = [
   {
@@ -37,6 +38,9 @@ const services = [
 ];
 
 export const SolutionsSection = () => {
+  const titleRef = useTextReveal(true);
+  const servicesRef = useStaggerAnimation(true, '.service-card');
+
   const handleViewDetails = (service: string) => {
     toast({
       title: service,
@@ -47,27 +51,27 @@ export const SolutionsSection = () => {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-background px-4 py-12 overflow-y-auto">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12">
+        <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12">
           Shutter Speed: Our Expertise
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={servicesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => {
             const Icon = service.icon;
             return (
-              <Card key={service.title} className="p-6 bg-card hover:bg-muted/50 transition-colors">
+              <AnimatedCard key={service.title} className="service-card p-6 bg-card hover:bg-muted/50 transition-colors">
                 <div className="space-y-4">
                   <Icon className="w-10 h-10 text-foreground" />
                   <h3 className="text-xl font-light">{service.title}</h3>
                   <p className="text-muted-foreground text-sm">{service.description}</p>
-                  <Button 
+                  <AnimatedButton 
                     onClick={() => handleViewDetails(service.title)}
                     variant="outline"
                     className="w-full"
                   >
                     View Details
-                  </Button>
+                  </AnimatedButton>
                 </div>
-              </Card>
+              </AnimatedCard>
             );
           })}
         </div>

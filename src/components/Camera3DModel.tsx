@@ -9,32 +9,46 @@ export const Camera3DModel = () => {
   const apertureRef = useRef<THREE.Group>(null);
   const scroll = useScroll();
 
-  useFrame(() => {
+  useFrame((state) => {
     const offset = scroll.offset;
+    const time = state.clock.getElapsedTime();
     
     if (cameraBodyRef.current) {
       // Position DSLR camera in front of viewer at the start
-      // As user scrolls, camera moves aside
+      // As user scrolls, camera moves aside with cinematic easing
       const initialZ = 0;
       const moveAmount = offset * 30;
       
-      cameraBodyRef.current.position.z = initialZ - moveAmount;
-      cameraBodyRef.current.position.y = 0;
-      cameraBodyRef.current.position.x = 3 + (offset * 5); // Move to the side
+      // Add subtle floating animation
+      const floatY = Math.sin(time * 0.5) * 0.1;
+      const floatX = Math.cos(time * 0.3) * 0.05;
       
-      // Rotate camera as it moves aside
-      cameraBodyRef.current.rotation.y = -Math.PI / 4 - offset * 0.5;
+      cameraBodyRef.current.position.z = initialZ - moveAmount;
+      cameraBodyRef.current.position.y = floatY;
+      cameraBodyRef.current.position.x = 3 + (offset * 5) + floatX;
+      
+      // Smooth rotation with easing
+      const targetRotationY = -Math.PI / 4 - offset * 0.5;
+      cameraBodyRef.current.rotation.y += (targetRotationY - cameraBodyRef.current.rotation.y) * 0.05;
+      
+      // Add subtle tilt
+      cameraBodyRef.current.rotation.x = Math.sin(time * 0.4) * 0.02;
     }
     
-    // Lens rolling effect - continuous rotation
+    // Lens rolling effect - smooth continuous rotation
     if (lensRef.current) {
-      lensRef.current.rotation.z = offset * Math.PI * 12;
+      lensRef.current.rotation.z = offset * Math.PI * 12 + Math.sin(time * 0.5) * 0.1;
     }
     
-    // Aperture blades animation
+    // Aperture blades animation with smooth easing
     if (apertureRef.current) {
       const openAmount = Math.min(offset * 3, 1);
-      apertureRef.current.scale.set(1 - openAmount * 0.5, 1 - openAmount * 0.5, 1);
+      const breathe = Math.sin(time * 0.8) * 0.05;
+      const targetScale = 1 - openAmount * 0.5 + breathe;
+      apertureRef.current.scale.lerp(
+        new THREE.Vector3(targetScale, targetScale, 1),
+        0.1
+      );
     }
   });
 

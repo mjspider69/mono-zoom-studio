@@ -1,6 +1,7 @@
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { AnimatedButton } from '@/components/AnimatedButton';
+import { AnimatedCard } from '@/components/AnimatedCard';
 import { toast } from '@/hooks/use-toast';
+import { useTextReveal, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 
 const pillars = [
   { title: 'Innovation', description: 'Pushing boundaries with creative solutions' },
@@ -14,6 +15,10 @@ const values = [
 ];
 
 export const AboutSection = () => {
+  const titleRef = useTextReveal(true);
+  const pillarsRef = useStaggerAnimation(true, '.pillar-card');
+  const valuesRef = useStaggerAnimation(true, '.value-card');
+
   const handleManifestoClick = () => {
     toast({
       title: "Our Manifesto",
@@ -26,7 +31,7 @@ export const AboutSection = () => {
       <div className="max-w-6xl mx-auto space-y-20">
         {/* Header */}
         <div className="text-center space-y-8">
-          <h2 className="text-4xl md:text-6xl font-light text-foreground tracking-tight">
+          <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight">
             Inside the Lens: Our Story
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
@@ -37,7 +42,7 @@ export const AboutSection = () => {
         </div>
 
         {/* Company Story */}
-        <Card className="p-8 bg-card">
+        <AnimatedCard className="p-8 bg-card">
           <h3 className="text-3xl font-light mb-6">Company Story</h3>
           <p className="text-muted-foreground leading-relaxed">
             Founded in 2018, gumming4u emerged from a vision to revolutionize digital marketing. 
@@ -45,7 +50,7 @@ export const AboutSection = () => {
             agency serving clients across 8+ industries. Our journey has been marked by innovation, 
             dedication, and a commitment to delivering extraordinary outcomes for every client.
           </p>
-        </Card>
+        </AnimatedCard>
 
         {/* Mission */}
         <div className="text-center">
@@ -60,59 +65,59 @@ export const AboutSection = () => {
         <div>
           <h3 className="text-3xl font-light text-center mb-12">Leadership</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="p-8 bg-card">
+            <AnimatedCard className="p-8 bg-card">
               <h4 className="text-2xl font-light mb-2">Aryaan Alam</h4>
               <p className="text-muted-foreground mb-4">Managing Director</p>
               <p className="text-muted-foreground leading-relaxed">
                 Visionary leader with a passion for innovation and strategic thinking. 
                 Aryaan drives the company's growth and ensures excellence in every project.
               </p>
-            </Card>
-            <Card className="p-8 bg-card">
+            </AnimatedCard>
+            <AnimatedCard className="p-8 bg-card">
               <h4 className="text-2xl font-light mb-2">Isaac Vivian</h4>
               <p className="text-muted-foreground mb-4">Marketing Director</p>
               <p className="text-muted-foreground leading-relaxed">
                 Creative genius specializing in brand strategy and digital campaigns. 
                 Isaac leads our marketing initiatives with creativity and precision.
               </p>
-            </Card>
+            </AnimatedCard>
           </div>
         </div>
 
         {/* Three Pillars */}
-        <div>
+        <div ref={pillarsRef}>
           <h3 className="text-3xl font-light text-center mb-12">Three Pillars</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {pillars.map((pillar) => (
-              <Card key={pillar.title} className="p-8 bg-card text-center">
+              <AnimatedCard key={pillar.title} className="pillar-card p-8 bg-card text-center">
                 <h4 className="text-2xl font-light mb-4">{pillar.title}</h4>
                 <p className="text-muted-foreground">{pillar.description}</p>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
         </div>
 
         {/* Values */}
-        <div>
+        <div ref={valuesRef}>
           <h3 className="text-3xl font-light text-center mb-12">Our Values</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {values.map((value) => (
-              <Card key={value} className="p-6 bg-card text-center">
+              <AnimatedCard key={value} className="value-card p-6 bg-card text-center">
                 <p className="text-xl font-light">{value}</p>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
         </div>
 
         {/* CTA */}
         <div className="text-center">
-          <Button 
+          <AnimatedButton
             onClick={handleManifestoClick}
             size="lg"
             className="text-lg px-8 py-6"
           >
             Read Our Manifesto
-          </Button>
+          </AnimatedButton>
         </div>
       </div>
     </div>

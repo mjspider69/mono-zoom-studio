@@ -9,27 +9,29 @@ export const DepthMarkers = () => {
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     
-    // Subtle animation for grids
+    // Subtle animation for grids - slower rotation
     gridRefs.current.forEach((grid, i) => {
       if (grid) {
-        grid.rotation.y = time * 0.05 + i * 0.1;
+        grid.rotation.y = time * 0.03 + i * 0.1;
+        grid.position.y = -5 + Math.sin(time * 0.5 + i) * 0.1;
       }
     });
     
-    // Gentle sway for light stands
+    // Gentle sway and pulse for light stands
     lightStandRefs.current.forEach((stand, i) => {
       if (stand) {
-        stand.rotation.z = Math.sin(time + i) * 0.02;
+        stand.rotation.z = Math.sin(time * 0.8 + i) * 0.03;
+        stand.position.y = Math.sin(time * 0.6 + i * 0.5) * 0.2;
       }
     });
   });
 
   const sections = [
     { z: 0, label: 'Home' },
-    { z: -25, label: 'About' },
-    { z: -50, label: 'Services' },
-    { z: -75, label: 'Projects' },
-    { z: -100, label: 'Contact' },
+    { z: -47.5, label: 'About' },
+    { z: -95, label: 'Services' },
+    { z: -142.5, label: 'Projects' },
+    { z: -190, label: 'Contact' },
   ];
 
   return (
@@ -60,7 +62,7 @@ export const DepthMarkers = () => {
               <cylinderGeometry args={[0.3, 0.1, 1, 8]} />
               <meshStandardMaterial color="#2a2a2a" metalness={0.6} />
             </mesh>
-            <pointLight position={[0, 1.5, 0]} intensity={0.5} color="#ffffff" distance={10} />
+            <pointLight position={[0, 1.5, 0]} intensity={0.5} color="#ffffff" distance={10} decay={2} />
           </group>
           
           {/* Light stand on the right */}
@@ -78,7 +80,7 @@ export const DepthMarkers = () => {
               <cylinderGeometry args={[0.3, 0.1, 1, 8]} />
               <meshStandardMaterial color="#2a2a2a" metalness={0.6} />
             </mesh>
-            <pointLight position={[0, 1.5, 0]} intensity={0.5} color="#ffffff" distance={10} />
+            <pointLight position={[0, 1.5, 0]} intensity={0.5} color="#ffffff" distance={10} decay={2} />
           </group>
           
           {/* Backdrop frame */}
@@ -108,10 +110,10 @@ export const DepthMarkers = () => {
         </group>
       ))}
       
-      {/* Ambient studio elements */}
-      <spotLight position={[0, 15, -50]} intensity={2} angle={0.5} penumbra={1} color="#ffffff" />
-      <spotLight position={[10, 10, -25]} intensity={1.5} angle={0.4} penumbra={1} color="#f0f0f0" />
-      <spotLight position={[-10, 10, -75]} intensity={1.5} angle={0.4} penumbra={1} color="#f0f0f0" />
+      {/* Ambient studio elements with enhanced cinematic lighting */}
+      <spotLight position={[0, 15, -95]} intensity={2} angle={0.5} penumbra={1} color="#ffffff" decay={2} />
+      <spotLight position={[10, 10, -47.5]} intensity={1.5} angle={0.4} penumbra={1} color="#f0f0f0" decay={2} />
+      <spotLight position={[-10, 10, -142.5]} intensity={1.5} angle={0.4} penumbra={1} color="#f0f0f0" decay={2} />
     </>
   );
 };

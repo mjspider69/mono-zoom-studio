@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { AnimatedButton } from '@/components/AnimatedButton';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
+import { useTextReveal, useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Mail, Phone } from 'lucide-react';
 
 export const ContactSection = () => {
+  const titleRef = useTextReveal(true);
+  const formRef = useScrollAnimation(true);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,10 +27,10 @@ export const ContactSection = () => {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-background px-4">
       <div className="max-w-4xl mx-auto w-full">
-        <h2 className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12">
+        <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12">
           Click with Us: Let's Connect
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div ref={formRef} className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-6">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -60,9 +63,9 @@ export const ContactSection = () => {
                   className="bg-card"
                 />
               </div>
-              <Button type="submit" size="lg" className="w-full">
+              <AnimatedButton type="submit" size="lg" className="w-full">
                 Send Message
-              </Button>
+              </AnimatedButton>
             </form>
           </div>
           <div className="space-y-6">

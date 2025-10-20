@@ -1,5 +1,6 @@
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { AnimatedButton } from '@/components/AnimatedButton';
+import { AnimatedCard } from '@/components/AnimatedCard';
+import { useTextReveal, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 
 const industries = [
   'E-Commerce', 'Healthcare', 'Real Estate', 'Education',
@@ -30,6 +31,11 @@ const testimonials = [
 ];
 
 export const HeroSection = () => {
+  const titleRef = useTextReveal(true);
+  const industriesRef = useStaggerAnimation(true, '.industry-card');
+  const clientsRef = useStaggerAnimation(true, '.client-card');
+  const testimonialsRef = useStaggerAnimation(true, '.testimonial-card');
+
   const handleExploreClick = () => {
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     window.scrollTo({ top: scrollHeight * 0.2, behavior: 'smooth' });
@@ -40,69 +46,69 @@ export const HeroSection = () => {
       {/* Hero Intro */}
       <div className="h-screen flex items-center justify-center">
         <div className="text-center space-y-8 px-4">
-          <h1 className="text-5xl md:text-7xl font-light text-white tracking-tight">
+          <h1 ref={titleRef} className="text-5xl md:text-7xl font-light text-white tracking-tight">
             Welcome to gumming4u
           </h1>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">
             Transform Ordinary Ideas Into Extraordinary Outcomes
           </p>
-          <Button 
+          <AnimatedButton 
             onClick={handleExploreClick}
             size="lg"
             className="text-lg px-8 py-6 bg-white text-black hover:bg-gray-200 transition-all"
           >
             Explore More
-          </Button>
+          </AnimatedButton>
         </div>
       </div>
 
       {/* Industries We Serve */}
-      <div className="min-h-screen flex items-center justify-center px-4 py-20">
+      <div ref={industriesRef} className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-light text-white mb-12">
             Industries We Serve
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {industries.map((industry) => (
-              <Card key={industry} className="p-6 bg-white/5 border-white/10 hover:bg-white/10 transition-all">
+              <AnimatedCard key={industry} className="industry-card p-6 bg-white/5 border-white/10 hover:bg-white/10 transition-all">
                 <h3 className="text-xl text-white font-light">{industry}</h3>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
         </div>
       </div>
 
       {/* Our Clients */}
-      <div className="min-h-screen flex items-center justify-center px-4 py-20">
+      <div ref={clientsRef} className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-light text-white mb-12">
             Our Clients
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {clients.map((client) => (
-              <Card key={client} className="p-6 bg-white/5 border-white/10 hover:bg-white/10 transition-all">
+              <AnimatedCard key={client} className="client-card p-6 bg-white/5 border-white/10 hover:bg-white/10 transition-all">
                 <h3 className="text-lg text-white font-light">{client}</h3>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
         </div>
       </div>
 
       {/* Client Testimonials */}
-      <div className="min-h-screen flex items-center justify-center px-4 py-20">
+      <div ref={testimonialsRef} className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-light text-white mb-12">
             Client Testimonials
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
-              <Card key={testimonial.name} className="p-8 bg-white/5 border-white/10">
+              <AnimatedCard key={testimonial.name} className="testimonial-card p-8 bg-white/5 border-white/10">
                 <p className="text-white/90 italic mb-6">"{testimonial.text}"</p>
                 <div className="text-white">
                   <p className="font-light">{testimonial.name}</p>
                   <p className="text-sm text-white/60">{testimonial.company}</p>
                 </div>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
         </div>

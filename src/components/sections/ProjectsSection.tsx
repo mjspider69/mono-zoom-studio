@@ -1,6 +1,7 @@
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { AnimatedButton } from '@/components/AnimatedButton';
+import { AnimatedCard } from '@/components/AnimatedCard';
 import { toast } from '@/hooks/use-toast';
+import { useTextReveal, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import project1 from '@/assets/project-1.jpg';
 import project2 from '@/assets/project-2.jpg';
 import project3 from '@/assets/project-3.jpg';
@@ -18,6 +19,9 @@ const projects = [
 ];
 
 export const ProjectsSection = () => {
+  const titleRef = useTextReveal(true);
+  const projectsRef = useStaggerAnimation(true, '.project-card');
+
   const handleViewProject = (project: string) => {
     toast({
       title: "Case Study",
@@ -28,12 +32,12 @@ export const ProjectsSection = () => {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-background px-4 py-12 overflow-y-auto">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12">
+        <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12">
           Picture Perfect: Our Portfolio
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={projectsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <Card key={project.title} className="overflow-hidden group cursor-pointer">
+            <AnimatedCard key={project.title} className="project-card overflow-hidden group cursor-pointer">
               <div className="relative aspect-video overflow-hidden">
                 <img 
                   src={project.image} 
@@ -41,19 +45,19 @@ export const ProjectsSection = () => {
                   className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Button 
+                  <AnimatedButton 
                     onClick={() => handleViewProject(project.title)}
                     variant="secondary"
                   >
                     View Case Study
-                  </Button>
+                  </AnimatedButton>
                 </div>
               </div>
               <div className="p-4">
                 <h3 className="text-lg font-light">{project.title}</h3>
                 <p className="text-sm text-muted-foreground">{project.category}</p>
               </div>
-            </Card>
+            </AnimatedCard>
           ))}
         </div>
       </div>
