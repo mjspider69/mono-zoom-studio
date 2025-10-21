@@ -14,9 +14,9 @@ export const Scene3DContent = () => {
 
       {/* Home Section - Z: 0 */}
       <Html 
-        position={[0, 0, 0]}
-        transform 
-        occlude
+        position={[0, 0, 0]} 
+        center
+        distanceFactor={10}
         zIndexRange={[100, 0]}
         style={{ 
           width: '100vw', 
@@ -29,9 +29,9 @@ export const Scene3DContent = () => {
 
       {/* About Section - Z: -52.5 */}
       <Html 
-        position={[0, 0, -52.5]}
-        transform 
-        occlude
+        position={[0, 0, -52.5]} 
+        center
+        distanceFactor={10}
         zIndexRange={[100, 0]}
         style={{ 
           width: '100vw', 
@@ -44,9 +44,9 @@ export const Scene3DContent = () => {
 
       {/* Services Section - Z: -105 */}
       <Html 
-        position={[0, 0, -105]}
-        transform 
-        occlude
+        position={[0, 0, -105]} 
+        center
+        distanceFactor={10}
         zIndexRange={[100, 0]}
         style={{ 
           width: '100vw', 
@@ -59,9 +59,9 @@ export const Scene3DContent = () => {
 
       {/* Projects Section - Z: -157.5 */}
       <Html 
-        position={[0, 0, -157.5]}
-        transform 
-        occlude
+        position={[0, 0, -157.5]} 
+        center
+        distanceFactor={10}
         zIndexRange={[100, 0]}
         style={{ 
           width: '100vw', 
@@ -75,8 +75,8 @@ export const Scene3DContent = () => {
       {/* Contact Section - Z: -210 */}
       <Html 
         position={[0, 0, -210]}
-        transform 
-        occlude
+        center
+        distanceFactor={10}
         zIndexRange={[100, 0]}
         style={{ 
           width: '100vw', 

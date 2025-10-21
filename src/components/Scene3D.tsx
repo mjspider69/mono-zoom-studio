@@ -23,7 +23,7 @@ export const Scene3D = () => {
         </ScrollControls>
         
         {/* Atmospheric fog for depth */}
-        <fog attach="fog" args={['#000000', 10, 130]} />
+        <fog attach="fog" args={['#000000', 50, 250]} />
       </Canvas>
     </div>
   );
