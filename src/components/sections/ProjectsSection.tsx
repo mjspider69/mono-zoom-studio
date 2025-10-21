@@ -32,7 +32,7 @@ export const ProjectsSection = () => {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-background px-4 py-12 overflow-y-auto">
       <div className="max-w-6xl mx-auto">
-        <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12">
+        <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12 drop-shadow-[0_0_25px_rgba(255,255,255,0.7)]">
           Picture Perfect: Our Portfolio
         </h2>
         <div ref={projectsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -54,8 +54,8 @@ export const ProjectsSection = () => {
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="text-lg font-light">{project.title}</h3>
-                <p className="text-sm text-muted-foreground">{project.category}</p>
+                <h3 className="text-lg font-light drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">{project.title}</h3>
+                <p className="text-sm text-muted-foreground drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">{project.category}</p>
               </div>
             </AnimatedCard>
           ))}
