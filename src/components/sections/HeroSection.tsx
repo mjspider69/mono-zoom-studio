@@ -46,10 +46,10 @@ export const HeroSection = () => {
       {/* Hero Intro */}
       <div className="h-screen flex items-center justify-center">
         <div className="text-center space-y-8 px-4">
-          <h1 ref={titleRef} className="text-5xl md:text-7xl font-light text-white tracking-tight drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] animate-pulse-glow">
+          <h1 ref={titleRef} className="text-5xl md:text-7xl font-light text-white tracking-tight drop-shadow-[0_0_40px_rgba(255,255,255,1)] animate-pulse-glow">
             Welcome to gumming4u
           </h1>
-          <p className="text-xl text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] max-w-2xl mx-auto">
+          <p className="text-xl text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.9)] max-w-2xl mx-auto">
             Transform Ordinary Ideas Into Extraordinary Outcomes
           </p>
           <AnimatedButton
@@ -65,13 +65,13 @@ export const HeroSection = () => {
       {/* Industries We Serve */}
       <div ref={industriesRef} className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-light text-white mb-12 drop-shadow-[0_0_30px_rgba(255,255,255,0.8)]">
+          <h2 className="text-4xl md:text-6xl font-light text-white mb-12 drop-shadow-[0_0_35px_rgba(255,255,255,1)]">
             Industries We Serve
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {industries.map((industry) => (
               <AnimatedCard key={industry} className="industry-card p-6 bg-white/5 border-white/10 hover:bg-white/10 transition-all">
-                <h3 className="text-xl text-white font-light drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]">{industry}</h3>
+                <h3 className="text-xl text-white font-light drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]">{industry}</h3>
               </AnimatedCard>
             ))}
           </div>
@@ -81,13 +81,13 @@ export const HeroSection = () => {
       {/* Our Clients */}
       <div ref={clientsRef} className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-light text-white mb-12 drop-shadow-[0_0_30px_rgba(255,255,255,0.8)]">
+          <h2 className="text-4xl md:text-6xl font-light text-white mb-12 drop-shadow-[0_0_35px_rgba(255,255,255,1)]">
             Our Clients
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {clients.map((client) => (
               <AnimatedCard key={client} className="client-card p-6 bg-white/5 border-white/10 hover:bg-white/10 transition-all">
-                <h3 className="text-lg text-white font-light drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]">{client}</h3>
+                <h3 className="text-lg text-white font-light drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]">{client}</h3>
               </AnimatedCard>
             ))}
           </div>
@@ -97,16 +97,16 @@ export const HeroSection = () => {
       {/* Client Testimonials */}
       <div ref={testimonialsRef} className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-light text-white mb-12 drop-shadow-[0_0_30px_rgba(255,255,255,0.8)]">
+          <h2 className="text-4xl md:text-6xl font-light text-white mb-12 drop-shadow-[0_0_35px_rgba(255,255,255,1)]">
             Client Testimonials
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
               <AnimatedCard key={testimonial.name} className="testimonial-card p-8 bg-white/5 border-white/10">
-                <p className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] italic mb-6">"{testimonial.text}"</p>
+                <p className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.9)] italic mb-6">"{testimonial.text}"</p>
                 <div className="text-white">
-                  <p className="font-light drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">{testimonial.name}</p>
-                  <p className="text-sm text-white/60">{testimonial.company}</p>
+                  <p className="font-light drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">{testimonial.name}</p>
+                  <p className="text-sm text-white/80 drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">{testimonial.company}</p>
                 </div>
               </AnimatedCard>
             ))}

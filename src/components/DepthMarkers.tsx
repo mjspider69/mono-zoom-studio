@@ -62,7 +62,7 @@ export const DepthMarkers = () => {
               <cylinderGeometry args={[0.3, 0.1, 1, 8]} />
               <meshStandardMaterial color="#2a2a2a" metalness={0.6} />
             </mesh>
-            <pointLight position={[0, 1.5, 0]} intensity={0.8} color={index === 0 ? "#ff00ff" : index === 1 ? "#00ffff" : index === 2 ? "#ffff00" : index === 3 ? "#00ff00" : "#ff0080"} distance={12} decay={2} />
+            <pointLight position={[0, 1.5, 0]} intensity={1.2} color={index === 0 ? "#ff0080" : index === 1 ? "#00ffff" : index === 2 ? "#ff00ff" : index === 3 ? "#ffff00" : "#00ff00"} distance={15} decay={2} />
           </group>
 
           {/* Light stand on the right */}
@@ -80,7 +80,7 @@ export const DepthMarkers = () => {
               <cylinderGeometry args={[0.3, 0.1, 1, 8]} />
               <meshStandardMaterial color="#2a2a2a" metalness={0.6} />
             </mesh>
-            <pointLight position={[0, 1.5, 0]} intensity={0.8} color={index === 0 ? "#00ffff" : index === 1 ? "#ffff00" : index === 2 ? "#ff00ff" : index === 3 ? "#ff0080" : "#00ff00"} distance={12} decay={2} />
+            <pointLight position={[0, 1.5, 0]} intensity={1.2} color={index === 0 ? "#00ff00" : index === 1 ? "#ff0080" : index === 2 ? "#00ffff" : index === 3 ? "#ff00ff" : "#ffff00"} distance={15} decay={2} />
           </group>
           
           {/* Backdrop frame */}
@@ -111,10 +111,11 @@ export const DepthMarkers = () => {
       ))}
       
       {/* Ambient studio elements with vibrant cinematic lighting */}
-      <spotLight position={[0, 15, -95]} intensity={2} angle={0.5} penumbra={1} color="#ff00ff" decay={2} />
-      <spotLight position={[10, 10, -47.5]} intensity={1.5} angle={0.4} penumbra={1} color="#00ffff" decay={2} />
-      <spotLight position={[-10, 10, -142.5]} intensity={1.5} angle={0.4} penumbra={1} color="#ffff00" decay={2} />
-      <spotLight position={[0, 12, -190]} intensity={1.8} angle={0.45} penumbra={1} color="#00ff00" decay={2} />
+      <spotLight position={[0, 15, -95]} intensity={2.5} angle={0.5} penumbra={1} color="#ff0080" decay={2} />
+      <spotLight position={[10, 10, -47.5]} intensity={2} angle={0.4} penumbra={1} color="#00ffff" decay={2} />
+      <spotLight position={[-10, 10, -142.5]} intensity={2} angle={0.4} penumbra={1} color="#ff00ff" decay={2} />
+      <spotLight position={[0, 12, -190]} intensity={2.2} angle={0.45} penumbra={1} color="#ffff00" decay={2} />
+      <spotLight position={[-8, 12, 0]} intensity={1.8} angle={0.4} penumbra={1} color="#00ff00" decay={2} />
     </>
   );
 };

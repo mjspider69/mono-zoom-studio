@@ -27,7 +27,7 @@ export const ContactSection = () => {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-background px-4">
       <div className="max-w-4xl mx-auto w-full">
-        <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12 drop-shadow-[0_0_25px_rgba(255,255,255,0.7)]">
+        <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight text-center mb-12 drop-shadow-[0_0_35px_rgba(255,255,255,1)]">
           Click with Us: Let's Connect
         </h2>
         <div ref={formRef} className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -70,8 +70,8 @@ export const ContactSection = () => {
           </div>
           <div className="space-y-6">
             <div>
-              <h3 className="text-2xl font-light mb-4 drop-shadow-[0_0_20px_rgba(255,255,255,0.6)]">Get in Touch</h3>
-              <p className="text-muted-foreground drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+              <h3 className="text-2xl font-light mb-4 drop-shadow-[0_0_25px_rgba(255,255,255,0.8)]">Get in Touch</h3>
+              <p className="text-muted-foreground drop-shadow-[0_0_20px_rgba(255,255,255,0.7)]">
                 Ready to transform your digital presence? Let's create something extraordinary together.
               </p>
             </div>

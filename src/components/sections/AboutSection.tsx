@@ -31,10 +31,10 @@ export const AboutSection = () => {
       <div className="max-w-6xl mx-auto space-y-20">
         {/* Header */}
         <div className="text-center space-y-8">
-          <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight drop-shadow-[0_0_25px_rgba(255,255,255,0.7)]">
+          <h2 ref={titleRef} className="text-4xl md:text-6xl font-light text-foreground tracking-tight drop-shadow-[0_0_35px_rgba(255,255,255,1)]">
             Inside the Lens: Our Story
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto drop-shadow-[0_0_20px_rgba(255,255,255,0.7)]">
             gumming4u is a digital marketing agency dedicated to crafting exceptional
             digital experiences. Founded by visionaries Aryaan Alam and Isaac Vivian,
             we transform brands through strategic creativity and cutting-edge technology.
@@ -43,8 +43,8 @@ export const AboutSection = () => {
 
         {/* Company Story */}
         <AnimatedCard className="p-8 bg-card">
-          <h3 className="text-3xl font-light mb-6 drop-shadow-[0_0_20px_rgba(255,255,255,0.6)]">Company Story</h3>
-          <p className="text-muted-foreground leading-relaxed drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]">
+          <h3 className="text-3xl font-light mb-6 drop-shadow-[0_0_25px_rgba(255,255,255,0.8)]">Company Story</h3>
+          <p className="text-muted-foreground leading-relaxed drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]">
             Founded in 2018, gumming4u emerged from a vision to revolutionize digital marketing.
             What started as a small team of passionate creatives has grown into a full-service
             agency serving clients across 8+ industries. Our journey has been marked by innovation,
