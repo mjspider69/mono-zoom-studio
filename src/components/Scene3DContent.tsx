@@ -1,9 +1,12 @@
 import { Html } from '@react-three/drei';
-import { HeroSection } from './sections/HeroSection';
-import { AboutSection } from './sections/AboutSection';
-import { SolutionsSection } from './sections/SolutionsSection';
-import { ProjectsSection } from './sections/ProjectsSection';
-import { ContactSection } from './sections/ContactSection';
+import { Scene0_Home } from './scenes/Scene0_Home';
+import { Scene1_FounderIntro } from './scenes/Scene1_FounderIntro';
+import { Scene2_MissionPillars } from './scenes/Scene2_MissionPillars';
+import { Scene3_ClientsSuccess } from './scenes/Scene3_ClientsSuccess';
+import { Scene4_TeamValues } from './scenes/Scene4_TeamValues';
+import { Scene5_Solutions } from './scenes/Scene5_Solutions';
+import { Scene6_Projects } from './scenes/Scene6_Projects';
+import { Scene7_Contact } from './scenes/Scene7_Contact';
 import { DepthMarkers } from './DepthMarkers';
 
 interface Scene3DContentProps {
@@ -11,25 +14,34 @@ interface Scene3DContentProps {
   onNavigate?: (index: number) => void;
 }
 
-// Z-positions with 28 unit spacing per page (210 / 8 = 26.25, using 28 for comfort)
-// These positions are coordinated with the anchor heights for seamless scroll-out visibility
-const SECTION_POSITIONS = [
-  0,        // Home (0 * 28)
-  -28,      // About (1 * 28)
-  -56,      // Solutions (2 * 28)
-  -84,      // Projects (3 * 28)
-  -112,     // Contact (4 * 28)
+// Z-position mapping for 8 scenes across 380 units
+// 380 / 8 = 47.5 units per scene
+const Z_POSITIONS_MAP = [
+  0,        // Scene 0: Home
+  -47.5,    // Scene 1: Founder Intro
+  -95,      // Scene 2: Mission & Pillars
+  -142.5,   // Scene 3: Clients & Success
+  -190,     // Scene 4: Team & Values
+  -237.5,   // Scene 5: Solutions
+  -285,     // Scene 6: Projects
+  -332.5,   // Scene 7: Contact
 ];
 
-export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) => {
+export const Scene3DContent = ({ onExplore }: Scene3DContentProps) => {
+  const handleExplore = () => {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    window.scrollTo({ top: scrollHeight * (1 / 8), behavior: 'smooth' });
+    onExplore?.();
+  };
+
   return (
     <>
       {/* Depth markers to show 3D space */}
-      <DepthMarkers maxZ={210} />
+      <DepthMarkers />
 
-      {/* Home Section - Z: 0 */}
+      {/* Scene 0: Home */}
       <Html
-        position={[0, 0, SECTION_POSITIONS[0]]}
+        position={[0, 0, Z_POSITIONS_MAP[0]]}
         transform
         occlude
         zIndexRange={[100, 0]}
@@ -39,12 +51,12 @@ export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) =
           pointerEvents: 'auto'
         }}
       >
-        <HeroSection onExplore={onExplore} />
+        <Scene0_Home onExplore={handleExplore} />
       </Html>
 
-      {/* About Section - Z: -13.75 */}
+      {/* Scene 1: Founder Intro */}
       <Html
-        position={[0, 0, SECTION_POSITIONS[1]]}
+        position={[0, 0, Z_POSITIONS_MAP[1]]}
         transform
         occlude
         zIndexRange={[100, 0]}
@@ -54,12 +66,12 @@ export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) =
           pointerEvents: 'auto'
         }}
       >
-        <AboutSection onNavigate={onNavigate} />
+        <Scene1_FounderIntro />
       </Html>
 
-      {/* Services Section - Z: -27.5 */}
+      {/* Scene 2: Mission & Pillars */}
       <Html
-        position={[0, 0, SECTION_POSITIONS[2]]}
+        position={[0, 0, Z_POSITIONS_MAP[2]]}
         transform
         occlude
         zIndexRange={[100, 0]}
@@ -69,12 +81,12 @@ export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) =
           pointerEvents: 'auto'
         }}
       >
-        <SolutionsSection onNavigate={onNavigate} />
+        <Scene2_MissionPillars />
       </Html>
 
-      {/* Projects Section - Z: -41.25 */}
+      {/* Scene 3: Clients & Success */}
       <Html
-        position={[0, 0, SECTION_POSITIONS[3]]}
+        position={[0, 0, Z_POSITIONS_MAP[3]]}
         transform
         occlude
         zIndexRange={[100, 0]}
@@ -84,12 +96,12 @@ export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) =
           pointerEvents: 'auto'
         }}
       >
-        <ProjectsSection onNavigate={onNavigate} />
+        <Scene3_ClientsSuccess />
       </Html>
 
-      {/* Contact Section - Z: -55 */}
+      {/* Scene 4: Team & Values */}
       <Html
-        position={[0, 0, SECTION_POSITIONS[4]]}
+        position={[0, 0, Z_POSITIONS_MAP[4]]}
         transform
         occlude
         zIndexRange={[100, 0]}
@@ -99,7 +111,52 @@ export const Scene3DContent = ({ onExplore, onNavigate }: Scene3DContentProps) =
           pointerEvents: 'auto'
         }}
       >
-        <ContactSection onNavigate={onNavigate} />
+        <Scene4_TeamValues />
+      </Html>
+
+      {/* Scene 5: Solutions */}
+      <Html
+        position={[0, 0, Z_POSITIONS_MAP[5]]}
+        transform
+        occlude
+        zIndexRange={[100, 0]}
+        style={{
+          width: '100vw',
+          height: '100vh',
+          pointerEvents: 'auto'
+        }}
+      >
+        <Scene5_Solutions />
+      </Html>
+
+      {/* Scene 6: Projects */}
+      <Html
+        position={[0, 0, Z_POSITIONS_MAP[6]]}
+        transform
+        occlude
+        zIndexRange={[100, 0]}
+        style={{
+          width: '100vw',
+          height: '100vh',
+          pointerEvents: 'auto'
+        }}
+      >
+        <Scene6_Projects />
+      </Html>
+
+      {/* Scene 7: Contact */}
+      <Html
+        position={[0, 0, Z_POSITIONS_MAP[7]]}
+        transform
+        occlude
+        zIndexRange={[100, 0]}
+        style={{
+          width: '100vw',
+          height: '100vh',
+          pointerEvents: 'auto'
+        }}
+      >
+        <Scene7_Contact />
       </Html>
     </>
   );

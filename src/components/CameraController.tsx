@@ -9,22 +9,22 @@ export const CameraController = () => {
   useFrame(() => {
     const offset = scroll.offset;
 
-    // Smooth traveling movie camera movement through 5 sections
-    // Sections at: Z=0, Z≈-28, Z≈-56, Z≈-84, Z≈-112
-    // Camera starts at Z=10 and travels across 15 virtual pages
-    const maxZDistance = 210;
-    const targetZ = 10 - (offset * maxZDistance);
+    // Smooth traveling movie camera movement through 8 scenes
+    // Camera starts at Z=10 and travels to Z=-370 (380 units total)
+    // Fixed scroll parameters: pages=26, MAX_Z_DISTANCE=380
+    const MAX_Z_DISTANCE = 380;
+    const targetZ = 10 - (offset * MAX_Z_DISTANCE);
 
-    // Snappier cinematic camera movement with tighter lerp
+    // Ultra-smooth cinematic camera movement
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.08);
-    
+
     // Keep camera steady - no rotation for clean viewing
     camera.position.y = 0;
     camera.position.x = 0;
     camera.rotation.x = 0;
     camera.rotation.y = 0;
     camera.rotation.z = 0;
-    
+
     // Look straight ahead
     camera.lookAt(0, 0, targetZ - 10);
   });

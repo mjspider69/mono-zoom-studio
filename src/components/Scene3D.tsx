@@ -21,14 +21,14 @@ export const Scene3D = ({ onExplore, onNavigate }: Scene3DProps) => {
         <directionalLight position={[-10, 10, -5]} intensity={0.8} color="#f5f5f5" />
         <spotLight position={[0, 15, 0]} intensity={1.2} angle={0.4} penumbra={1} color="#ffffff" />
 
-        <ScrollControls pages={15} damping={0.1}>
+        <ScrollControls pages={26} damping={0.1}>
           <CameraController />
           <Camera3DModel />
           <Scene3DContent onExplore={onExplore} onNavigate={onNavigate} />
         </ScrollControls>
 
         {/* Atmospheric fog for depth */}
-        <fog attach="fog" args={['#000000', 10, 130]} />
+        <fog attach="fog" args={['#000000', 10, 200]} />
       </Canvas>
     </div>
   );
