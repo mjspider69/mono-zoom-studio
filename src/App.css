@@ -1,15 +1,32 @@
+/* ==================================== */
+/* 1. Global/HTML Setup for Smooth Scroll */
+/* ==================================== */
+html {
+  /* This line enables smooth scrolling for anchor links */
+  scroll-behavior: smooth; 
+}
+
+/* ==================================== */
+/* 2. Original Root Styles */
+/* ==================================== */
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  /* Optional suggestion from previous response */
+  min-height: 100vh;
 }
 
+/* ==================================== */
+/* 3. Original Logo Styles */
+/* ==================================== */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
-  transition: filter 300ms;
+  /* Refined transition for better performance */
+  transition: filter 300ms ease-in-out;
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
@@ -18,6 +35,9 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* ==================================== */
+/* 4. Animation Keyframes */
+/* ==================================== */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,12 +47,18 @@
   }
 }
 
+/* ==================================== */
+/* 5. Media Query for Animation */
+/* ==================================== */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* ==================================== */
+/* 6. Other Original Styles */
+/* ==================================== */
 .card {
   padding: 2em;
 }
